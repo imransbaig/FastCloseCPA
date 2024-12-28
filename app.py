@@ -2,7 +2,9 @@ import os
 from flask import Flask, render_template, request, flash, redirect, url_for
 import logging
 from datetime import datetime
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from extensions import db
+from werkzeug.security import generate_password_hash
 
 # Setup detailed logging
 logging.basicConfig(
@@ -30,13 +32,76 @@ logger.info("Database configuration set")
 db.init_app(app)
 logger.info("Database initialization complete")
 
+# Initialize Flask-Login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+logger.info("Flask-Login initialized")
+
 # Import models after db initialization
 try:
-    from models import Consultation, BlogPost
+    from models import User, Consultation, BlogPost, Document
     logger.info("Models imported successfully")
 except Exception as e:
     logger.error(f"Error importing models: {e}")
     raise
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+# Import and register blueprints
+try:
+    from blueprints.client_portal import bp as client_portal_bp
+    app.register_blueprint(client_portal_bp)
+    logger.info("Client portal blueprint registered")
+except Exception as e:
+    logger.error(f"Error registering client portal blueprint: {e}")
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        user = User.query.filter_by(email=request.form['email']).first()
+        if user and user.check_password(request.form['password']):
+            login_user(user)
+            flash('Logged in successfully.', 'success')
+            next_page = request.args.get('next')
+            return redirect(next_page or url_for('index'))
+        flash('Invalid email or password.', 'error')
+    return render_template('auth/login.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        if User.query.filter_by(email=request.form['email']).first():
+            flash('Email already registered.', 'error')
+            return redirect(url_for('register'))
+
+        user = User(
+            username=request.form['username'],
+            email=request.form['email']
+        )
+        user.set_password(request.form['password'])
+
+        try:
+            db.session.add(user)
+            db.session.commit()
+            login_user(user)
+            flash('Registration successful!', 'success')
+            return redirect(url_for('index'))
+        except Exception as e:
+            logger.error(f"Registration error: {e}")
+            db.session.rollback()
+            flash('An error occurred during registration.', 'error')
+
+    return render_template('auth/register.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('index'))
 
 @app.route('/')
 def index():
