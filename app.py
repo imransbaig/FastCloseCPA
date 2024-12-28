@@ -58,6 +58,11 @@ try:
 except Exception as e:
     logger.error(f"Error registering client portal blueprint: {e}")
 
+# Add a test route to verify the server is working
+@app.route('/health')
+def health_check():
+    return {'status': 'ok', 'message': 'Flask server is running'}
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
