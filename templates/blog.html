@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - Financial Insights & Updates{% endblock %}
+
+{% block content %}
+<section class="blog-header py-4">
+    <div class="container">
+        <h1 class="text-center mb-4">Financial Insights & Updates</h1>
+        <p class="lead text-center">Expert insights on accounting, finance, and business growth</p>
+    </div>
+</section>
+
+<section class="blog-posts py-4">
+    <div class="container">
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-md-6 mb-4">
+                <div class="blog-card h-100">
+                    {% if post.image_url %}
+                    <img src="{{ post.image_url }}" class="card-img-top" alt="{{ post.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h2 class="card-title">{{ post.title }}</h2>
+                        <p class="blog-meta">
+                            <small>{{ post.created_at.strftime('%B %d, %Y') }}</small>
+                        </p>
+                        <p class="card-text">{{ post.summary }}</p>
+                        <a href="{{ url_for('blog_post', slug=post.slug) }}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
