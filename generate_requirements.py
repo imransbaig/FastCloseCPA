@@ -2,6 +2,7 @@ import subprocess
 import sys
 
 def generate_requirements():
+    """Generate requirements.txt file from the installed packages"""
     packages = [
         "email-validator==2.2.0",
         "flask-login==0.6.3",
@@ -13,18 +14,17 @@ def generate_requirements():
         "werkzeug==3.1.3",
         "wfastcgi==3.0.0"
     ]
-    
+
     try:
-        # Install packages
-        for package in packages:
-            subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-        
-        # Generate requirements.txt
-        subprocess.check_call([sys.executable, "-m", "pip", "freeze", ">", "requirements.txt"], shell=True)
+        # Generate requirements.txt directly
+        with open('requirements.txt', 'w') as f:
+            for package in packages:
+                f.write(f"{package}\n")
         print("Requirements.txt generated successfully!")
-    except subprocess.CalledProcessError as e:
+        return True
+    except Exception as e:
         print(f"Error occurred: {e}")
-        sys.exit(1)
+        return False
 
 if __name__ == "__main__":
-    generate_requirements()
+    sys.exit(0 if generate_requirements() else 1)
