@@ -4,21 +4,26 @@
 
 {% block content %}
 <!-- Top Banner -->
-<div class="w-100 py-2" style="background: linear-gradient(90deg, #00ff8052, #00b8ff52);">
-    <div class="container d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center gap-3">
-            <a href="https://www.thumbtack.com/ny/new-york/tax-preparation/imran-baig-cpa/service/389548675861151756" 
-               target="_blank" 
-               rel="noopener noreferrer" 
-               class="d-flex align-items-center text-decoration-none">
-                <img src="{{ url_for('static', filename='images/thumbtack-badge.png') }}" 
-                     alt="Thumbtack 5-Star Reviews" 
-                     style="height: 24px; width: auto;"
-                     class="me-2">
-                <span class="text-dark">Maximize Tax Savings with 5-Star CPA</span>
-            </a>
+<div class="w-100 py-3" style="background: linear-gradient(90deg, rgba(0, 255, 128, 0.2), rgba(0, 184, 255, 0.3)), url('{{ url_for('static', filename='images/texture-overlay.png') }}');">
+    <div class="container">
+        <div class="row align-items-center justify-content-center text-center">
+            <div class="col-auto">
+                <a href="https://www.thumbtack.com/ny/new-york/tax-preparation/imran-baig-cpa/service/389548675861151756" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="d-inline-block">
+                    <img src="{{ url_for('static', filename='images/thumbtack-badge.png') }}" 
+                         alt="Thumbtack 5-Star Reviews" 
+                         style="height: 32px; width: auto;">
+                </a>
+            </div>
+            <div class="col text-center">
+                <h2 class="mb-0 text-white h5">Maximize Tax Savings with 5-Star CPA</h2>
+            </div>
+            <div class="col-auto">
+                <a href="/contact" class="btn btn-light btn-sm px-4">Schedule Your Free Consultation</a>
+            </div>
         </div>
-        <a href="/contact" class="btn btn-dark btn-sm">Get Started</a>
     </div>
 </div>
 
