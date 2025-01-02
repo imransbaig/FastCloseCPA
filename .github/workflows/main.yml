@@ -34,3 +34,4 @@ jobs:
         app-name: 'fastcloseai'
         publish-profile: ${{ secrets.AZUREWEBAPP_PUBLISHPROFILE }}
         package: .
+        startup-command: 'gunicorn --bind=0.0.0.0:8000 app:app'
