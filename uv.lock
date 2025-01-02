@@ -166,15 +166,15 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "email-validator", specifier = ">=2.2.0" },
-    { name = "flask", specifier = ">=3.1.0" },
-    { name = "flask-login", specifier = ">=0.6.3" },
-    { name = "flask-sqlalchemy", specifier = ">=3.1.1" },
-    { name = "gunicorn", specifier = ">=23.0.0" },
-    { name = "psycopg2-binary", specifier = ">=2.9.10" },
-    { name = "trafilatura", specifier = ">=2.0.0" },
-    { name = "werkzeug", specifier = ">=3.1.3" },
-    { name = "wfastcgi", specifier = ">=3.0.0" },
+    { name = "email-validator", specifier = "==2.2.0" },
+    { name = "flask", specifier = "==3.1.0" },
+    { name = "flask-login", specifier = "==0.6.3" },
+    { name = "flask-sqlalchemy", specifier = "==3.1.1" },
+    { name = "gunicorn", specifier = "==23.0.0" },
+    { name = "psycopg2-binary", specifier = "==2.9.10" },
+    { name = "trafilatura", specifier = "==2.0.0" },
+    { name = "werkzeug", specifier = "==3.1.3" },
+    { name = "wfastcgi", specifier = "==3.0.0" },
 ]
 
 [[package]]
