@@ -328,8 +328,6 @@ h1, h2, h3 {
     background-color: var(--bs-gray-100) !important;
 }
 
-/* Add/update these styles in custom.css */
-
 /* Consultation CTA */
 .consultation-cta {
     background: var(--gradient-primary);
@@ -452,7 +450,7 @@ h1, h2, h3 {
 
 /* Add/update these styles for the consultation button */
 .btn-consultation-yellow {
-    background-color: #FFEB3B !important;
+    background-color: #FFD700 !important;  /* Bright yellow color */
     color: #000 !important;
     border: none;
     font-weight: 500;
@@ -460,7 +458,7 @@ h1, h2, h3 {
 }
 
 .btn-consultation-yellow:hover {
-    background-color: #FDD835 !important;
+    background-color: #FFA500 !important;  /* Orange color on hover */
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
