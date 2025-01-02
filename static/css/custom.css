@@ -32,39 +32,6 @@ section {
     overflow: hidden;
 }
 
-/* Added styles for hero section and trust indicators */
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, rgba(33, 150, 243, 0.95), rgba(0, 188, 212, 0.95));
-    z-index: 1;
-}
-
-.hero-section .container {
-    position: relative;
-    z-index: 2;
-}
-
-.trust-indicators {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    backdrop-filter: blur(10px);
-}
-
-.thumbtack-badge {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 0.25rem;
-    margin-top: 1rem;
-}
-
-
 /* Cards */
 .card {
     transition: transform 0.3s ease-in-out;
@@ -360,6 +327,8 @@ h1, h2, h3 {
 .bg-light {
     background-color: var(--bs-gray-100) !important;
 }
+
+/* Add/update these styles in custom.css */
 
 /* Consultation CTA */
 .consultation-cta {
