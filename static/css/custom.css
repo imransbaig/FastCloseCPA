@@ -1,6 +1,14 @@
 /* Hide Elfsight branding */
-.eapps-widget-toolbar {
+.eapps-widget-toolbar,
+.eapps-widget-toolbar-panel,
+.eapps-widget-toolbar-panel-wrapper,
+.eapps-widget-toolbar-panel-only-you,
+.eapps-widget-toolbar-panel-popularity,
+.eapps-widget-toolbar-panel-share-cover,
+.eapps-widget-toolbar-panel-share {
     display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
 }
 
 /* General Styles */
@@ -332,8 +340,6 @@ h1, h2, h3 {
 .bg-light {
     background-color: var(--bs-gray-100) !important;
 }
-
-/* Add/update these styles in custom.css */
 
 /* Consultation CTA */
 .consultation-cta {
