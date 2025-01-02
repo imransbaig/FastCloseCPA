@@ -449,3 +449,18 @@ h1, h2, h3 {
     color: var(--bs-light);
     opacity: 0.8;
 }
+
+/* Add/update these styles for the consultation button */
+.btn-consultation-yellow {
+    background-color: #FFEB3B !important;
+    color: #000 !important;
+    border: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-consultation-yellow:hover {
+    background-color: #FDD835 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
