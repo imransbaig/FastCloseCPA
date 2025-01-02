@@ -1,0 +1,63 @@
+Banner Specifications:
+1. Layout & Design:
+Background:
+
+Clean, modern background with a subtle gradient (e.g., blue to white) or solid professional color.
+Minimalistic and visually similar to the banner on getbasis.ai.
+Imagery:
+
+High-quality image of a professional CPA or tax-related visuals (e.g., calculator, tax forms).
+2. Headline (6 Words):
+"Maximize Tax Savings with 5-Star CPA"
+
+Style:
+Bold and prominent font.
+Align centrally for focus.
+3. Subheadline:
+"Highest Rated CPA on Thumbtack"
+
+Style:
+Smaller font size than the headline, but still legible and eye-catching.
+Positioned directly below the headline for emphasis.
+4. Call-to-Action (CTA) Button:
+Text:
+"Book Your Free Consultation"
+Design:
+Prominent button with a contrasting color (e.g., green or blue).
+Rounded edges and hover effects (e.g., darker shade or slight scaling).
+Link:
+Redirect to your consultation booking page or contact form.
+5. Trust Indicators:
+Thumbtack Badge:
+
+Display the Thumbtack logo with a 5-star rating graphic prominently below the subheadline or near the CTA.
+Include a tagline under the badge:
+"Rated 5 Stars by Real Clients."
+Alt Text:
+
+Ensure all images and icons have descriptive alt text for accessibility and SEO.
+6. Color Scheme:
+Primary Colors:
+Blue and white for professionalism and trust.
+Accent Colors:
+Subtle gold or green for success and financial growth.
+7. Typography:
+Font:
+Modern, clean sans-serif font similar to Basis’s.
+Consistency:
+Uniform font styles and sizes for headline, subheadline, and body text.
+8. Responsiveness:
+Fully responsive design optimized for all devices (desktop, tablet, and mobile).
+9. Integration:
+Position the banner prominently at the top of your homepage, similar to the placement on getbasis.ai, ensuring immediate visibility.
+10. Performance Optimization:
+Optimize images and assets for web performance to reduce loading times.
+Final Text on the Banner:
+Headline:
+"Maximize Tax Savings with 5-Star CPA"
+
+Subheadline:
+"Highest Rated CPA on Thumbtack"
+
+CTA:
+"Book Your Free Consultation"
