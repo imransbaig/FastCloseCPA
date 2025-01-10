@@ -17,6 +17,9 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 logger.info("Flask application instance created")
 
+# setup a secret key, required by sessions
+app.secret_key = os.environ.get("FLASK_SECRET_KEY") or "a secret key"
+
 # Email configuration
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
