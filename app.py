@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 import logging
 from datetime import datetime
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from flask_mail import Mail, Message
 from extensions import db
 from werkzeug.security import generate_password_hash
 
@@ -16,9 +17,16 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 logger.info("Flask application instance created")
 
-# setup a secret key, required by sessions
-app.secret_key = os.environ.get("FLASK_SECRET_KEY") or "fastcloseai2024"
-logger.info("Secret key configured")
+# Email configuration
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('MAIL_DEFAULT_SENDER', 'contact@fastclose.ai')
+
+mail = Mail(app)
+logger.info("Mail configuration complete")
 
 # Configure database - use PostgreSQL for Azure, fallback to SQLite for local
 database_url = os.environ.get('DATABASE_URL', 'sqlite:///fastclose.db')
@@ -157,13 +165,32 @@ def contact():
         )
 
         try:
+            # Save to database
             db.session.add(consultation)
             db.session.commit()
             logger.info(f"New consultation created for {email}")
+
+            # Send email
+            msg = Message(
+                subject=f"New Contact Form Submission - {service_type}",
+                recipients=['contact@fastclose.ai'],
+                body=f"""
+                New contact form submission:
+
+                Name: {name}
+                Email: {email}
+                Service Type: {service_type}
+                Message:
+                {message}
+                """
+            )
+            mail.send(msg)
+            logger.info(f"Email notification sent for consultation from {email}")
+
             flash('Thank you for your message! We will contact you soon.', 'success')
             return redirect(url_for('contact'))
         except Exception as e:
-            logger.error(f"Error saving consultation: {e}")
+            logger.error(f"Error processing contact form: {e}")
             flash('An error occurred. Please try again.', 'error')
             db.session.rollback()
 
