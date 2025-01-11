@@ -28,6 +28,13 @@ app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = 'contact@fastclose.ai'
 
+# Log email configuration
+logger.info(f"Mail server: {app.config['MAIL_SERVER']}")
+logger.info(f"Mail port: {app.config['MAIL_PORT']}")
+logger.info(f"Mail use TLS: {app.config['MAIL_USE_TLS']}")
+logger.info(f"Mail username configured: {'Yes' if app.config['MAIL_USERNAME'] else 'No'}")
+logger.info(f"Mail password configured: {'Yes' if app.config['MAIL_PASSWORD'] else 'No'}")
+
 mail = Mail(app)
 logger.info("Mail configuration complete")
 
@@ -160,6 +167,8 @@ def contact():
         message = request.form.get('message')
         service_type = request.form.get('service_type')
 
+        logger.info(f"Processing contact form submission from {email}")
+
         consultation = Consultation(
             name=name,
             email=email,
@@ -174,30 +183,37 @@ def contact():
             logger.info(f"New consultation created for {email}")
 
             # Send email
-            msg = Message(
-                subject=f"New Contact Form Submission - {service_type}",
-                sender=app.config['MAIL_DEFAULT_SENDER'],
-                recipients=['imran.s.baig.cpa@gmail.com'],  # Send to your Gmail
-                body=f"""
-                New contact form submission:
+            try:
+                msg = Message(
+                    subject=f"New Contact Form Submission - {service_type}",
+                    sender=app.config['MAIL_DEFAULT_SENDER'],
+                    recipients=['imran.s.baig.cpa@gmail.com'],
+                    body=f"""
+                    New contact form submission:
 
-                Name: {name}
-                Email: {email}
-                Service Type: {service_type}
-                Message:
-                {message}
-                """
-            )
-            mail.send(msg)
-            logger.info(f"Email notification sent for consultation from {email}")
+                    Name: {name}
+                    Email: {email}
+                    Service Type: {service_type}
+                    Message:
+                    {message}
+                    """
+                )
+                mail.send(msg)
+                logger.info(f"Email notification sent for consultation from {email}")
 
-            flash('Thank you for your message! We will contact you soon.', 'success')
-            return redirect(url_for('contact'))
+                flash('Thank you for your message! We will contact you soon.', 'success')
+                return redirect(url_for('contact'))
+
+            except Exception as email_error:
+                logger.error(f"Error sending email: {email_error}")
+                # Don't rollback database transaction if email fails
+                flash('Your message was saved but there was an issue sending the notification email.', 'warning')
+                return redirect(url_for('contact'))
 
         except Exception as e:
             logger.error(f"Error processing contact form: {e}")
             db.session.rollback()
-            flash('An error occurred while sending your message. Please try again later.', 'error')
+            flash('An error occurred while processing your message. Please try again later.', 'error')
             return render_template('contact.html')
 
     return render_template('contact.html')
