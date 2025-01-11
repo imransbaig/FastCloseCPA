@@ -3,7 +3,8 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 import logging
 from datetime import datetime
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from flask_mail import Mail, Message
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 from extensions import db
 from werkzeug.security import generate_password_hash
 
@@ -20,23 +21,9 @@ logger.info("Flask application instance created")
 # setup a secret key, required by sessions
 app.secret_key = os.environ.get("FLASK_SECRET_KEY") or "a secret key"
 
-# Email configuration
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
-app.config['MAIL_DEFAULT_SENDER'] = 'contact@fastclose.ai'
-
-# Log email configuration
-logger.info(f"Mail server: {app.config['MAIL_SERVER']}")
-logger.info(f"Mail port: {app.config['MAIL_PORT']}")
-logger.info(f"Mail use TLS: {app.config['MAIL_USE_TLS']}")
-logger.info(f"Mail username configured: {'Yes' if app.config['MAIL_USERNAME'] else 'No'}")
-logger.info(f"Mail password configured: {'Yes' if app.config['MAIL_PASSWORD'] else 'No'}")
-
-mail = Mail(app)
-logger.info("Mail configuration complete")
+# Configure SendGrid
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+logger.info(f"SendGrid API Key configured: {'Yes' if SENDGRID_API_KEY else 'No'}")
 
 # Configure database - use PostgreSQL for Azure, fallback to SQLite for local
 database_url = os.environ.get('DATABASE_URL', 'sqlite:///fastclose.db')
@@ -182,30 +169,35 @@ def contact():
             db.session.commit()
             logger.info(f"New consultation created for {email}")
 
-            # Send email
+            # Send email using SendGrid
             try:
-                msg = Message(
-                    subject=f"New Contact Form Submission - {service_type}",
-                    sender=app.config['MAIL_DEFAULT_SENDER'],
-                    recipients=['imran.s.baig.cpa@gmail.com'],
-                    body=f"""
-                    New contact form submission:
+                message_body = f"""
+                New contact form submission:
 
-                    Name: {name}
-                    Email: {email}
-                    Service Type: {service_type}
-                    Message:
-                    {message}
-                    """
+                Name: {name}
+                Email: {email}
+                Service Type: {service_type}
+                Message:
+                {message}
+                """
+
+                message = Mail(
+                    from_email='contact@fastclose.ai',
+                    to_emails='imran.s.baig.cpa@gmail.com',
+                    subject=f'New Contact Form Submission - {service_type}',
+                    plain_text_content=message_body
                 )
-                mail.send(msg)
+
+                sg = SendGridAPIClient(SENDGRID_API_KEY)
+                response = sg.send(message)
+                logger.info(f"SendGrid Response Status Code: {response.status_code}")
                 logger.info(f"Email notification sent for consultation from {email}")
 
                 flash('Thank you for your message! We will contact you soon.', 'success')
                 return redirect(url_for('contact'))
 
             except Exception as email_error:
-                logger.error(f"Error sending email: {email_error}")
+                logger.error(f"Error sending email via SendGrid: {email_error}")
                 # Don't rollback database transaction if email fails
                 flash('Your message was saved but there was an issue sending the notification email.', 'warning')
                 return redirect(url_for('contact'))
