@@ -176,7 +176,8 @@ def contact():
             # Send email
             msg = Message(
                 subject=f"New Contact Form Submission - {service_type}",
-                recipients=['contact@fastclose.ai'],
+                sender=app.config['MAIL_DEFAULT_SENDER'],
+                recipients=['imran.s.baig.cpa@gmail.com'],  # Send to your Gmail
                 body=f"""
                 New contact form submission:
 
@@ -192,10 +193,12 @@ def contact():
 
             flash('Thank you for your message! We will contact you soon.', 'success')
             return redirect(url_for('contact'))
+
         except Exception as e:
             logger.error(f"Error processing contact form: {e}")
-            flash('An error occurred. Please try again.', 'error')
             db.session.rollback()
+            flash('An error occurred while sending your message. Please try again later.', 'error')
+            return render_template('contact.html')
 
     return render_template('contact.html')
 
