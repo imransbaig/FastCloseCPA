@@ -45,6 +45,21 @@ logger.info("Database configuration set")
 
 # Initialize extensions
 db.init_app(app)
+# Add retry logic for database connection
+max_retries = 3
+retry_count = 0
+while retry_count < max_retries:
+    try:
+        with app.app_context():
+            db.engine.connect()
+            break
+    except Exception as e:
+        retry_count += 1
+        logger.warning(f"Database connection attempt {retry_count} failed: {e}")
+        if retry_count == max_retries:
+            logger.error("Failed to connect to database after maximum retries")
+            raise
+        time.sleep(2)  # Wait before retrying
 logger.info("Database initialization complete")
 
 # Initialize Flask-Login

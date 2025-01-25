@@ -1,3 +1,4 @@
+
 [project]
 name = "fastcloseai"
 version = "0.1.0"
@@ -15,4 +16,5 @@ dependencies = [
     "wfastcgi==3.0.0",
     "flask-mail==0.9.1",
     "sendgrid>=6.11.0",
+    "python-dotenv==1.0.0"
 ]
