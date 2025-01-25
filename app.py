@@ -192,7 +192,7 @@ def contact():
                 """
 
                 message = Mail(
-                    from_email='contact@fastclose.ai',
+                    from_email='imran.s.baig.cpa@gmail.com',  # Changed to verified sender
                     to_emails='imran.s.baig.cpa@gmail.com',
                     subject=f'New Contact Form Submission - {service_type}',
                     plain_text_content=message_body
