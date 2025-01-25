@@ -29,7 +29,17 @@ logger.info(f"SendGrid API Key configured: {'Yes' if SENDGRID_API_KEY else 'No'}
 database_url = os.environ.get('DATABASE_URL', 'sqlite:///fastclose.db')
 if database_url.startswith("postgres://"):  # Handle Azure PostgreSQL URL
     database_url = database_url.replace("postgres://", "postgresql://", 1)
+    # Add SSL mode and connection retry parameters
+    if '?' in database_url:
+        database_url += '&sslmode=require&connect_timeout=10'
+    else:
+        database_url += '?sslmode=require&connect_timeout=10'
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    'pool_pre_ping': True,
+    'pool_recycle': 300,
+    'pool_timeout': 900
+}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 logger.info("Database configuration set")
 
