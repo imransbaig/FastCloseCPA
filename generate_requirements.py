@@ -11,8 +11,8 @@ def generate_requirements():
         "gunicorn==23.0.0",
         "psycopg2-binary==2.9.10",
         "python-dotenv==1.0.0",
-        "sendgrid==6.11.0",  # Added SendGrid
-        "pytest==8.3.4",  # Added test dependencies
+        "sendgrid==6.11.0",
+        "pytest==8.3.4",
         "pytest-cov==6.0.0",
         "pytest-flask==1.3.0",
         "waitress==3.0.2",

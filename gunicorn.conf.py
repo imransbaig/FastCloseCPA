@@ -1,11 +1,11 @@
 import multiprocessing
 
-# Server socket
-bind = "0.0.0.0:8080"
+# Server socket configuration
+bind = "0.0.0.0:8000"
 backlog = 2048
 
 # Worker processes
-workers = 4
+workers = multiprocessing.cpu_count() * 2 + 1
 worker_class = "sync"
 worker_connections = 1000
 timeout = 120
@@ -18,7 +18,7 @@ errorlog = "-"
 loglevel = "info"
 
 # Process naming
-proc_name = 'gunicorn_fastclose'
+proc_name = 'fastclose_app'
 
 # Server mechanics
 daemon = False
@@ -28,8 +28,10 @@ user = None
 group = None
 tmp_upload_dir = None
 
-# SSL
+# SSL (if needed)
 keyfile = None
 certfile = None
+
+# Enable output capture
 capture_output = True
 enable_stdio_inheritance = True
