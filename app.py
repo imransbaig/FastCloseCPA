@@ -7,6 +7,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from extensions import db
 from werkzeug.security import generate_password_hash
+import time
 
 # Setup detailed logging
 logging.basicConfig(
@@ -207,8 +208,8 @@ def contact():
                 """
 
                 message = Mail(
-                    from_email='imran.s.baig.cpa@gmail.com',  # Changed to verified sender
-                    to_emails='imran.s.baig.cpa@gmail.com',
+                    from_email='contact@fastclose.ai',  # Updated email address
+                    to_emails='contact@fastclose.ai', # Updated email address
                     subject=f'New Contact Form Submission - {service_type}',
                     plain_text_content=message_body
                 )

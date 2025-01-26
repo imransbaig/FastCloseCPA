@@ -34,6 +34,14 @@ task = "shell.exec"
 args = "python app.py"
 waitForPort = 5000
 
+[[workflows.workflow]]
+name = "Run Tests"
+author = 38595295
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python -m unittest tests.py -v"
+
 [[ports]]
 localPort = 5000
 externalPort = 80
