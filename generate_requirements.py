@@ -10,7 +10,12 @@ def generate_requirements():
         "flask-sqlalchemy==3.1.1",
         "gunicorn==23.0.0",
         "psycopg2-binary==2.9.10",
-        "trafilatura==2.0.0",
+        "python-dotenv==1.0.0",
+        "sendgrid==6.11.0",  # Added SendGrid
+        "pytest==8.3.4",  # Added test dependencies
+        "pytest-cov==6.0.0",
+        "pytest-flask==1.3.0",
+        "waitress==3.0.2",
         "werkzeug==3.1.3",
         "wfastcgi==3.0.0"
     ]
