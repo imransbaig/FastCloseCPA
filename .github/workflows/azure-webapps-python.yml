@@ -68,3 +68,9 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZUREWEBAPP_PUBLISHPROFILE }}
+          
+      - name: 'Post Deployment Status'
+        if: always()
+        run: |
+          echo "Deployment Status: ${{ steps.deploy-to-webapp.outcome }}"
+          echo "Deployment URL: https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net"
