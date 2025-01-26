@@ -1,2 +1,4 @@
 #!/bin/bash
-gunicorn --bind=0.0.0.0:8000 app:app
+cd /home/site/wwwroot
+export PYTHONPATH=/home/site/wwwroot
+gunicorn --config gunicorn.conf.py app:app

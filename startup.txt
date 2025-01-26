@@ -1,1 +1,1 @@
-gunicorn --bind=0.0.0.0:8000 --timeout 600 --workers=4 --access-logfile '-' --error-logfile '-' app:app
+python -m gunicorn --bind=0.0.0.0:8000 --timeout 600 --workers=4 --access-logfile '-' --error-logfile '-' --config gunicorn.conf.py app:app
