@@ -1,0 +1,109 @@
+Run Azure/static-web-apps-deploy@v1
+/usr/bin/docker run --name adc3aab0b9d459794349b2299f32157b3364_66582b --label 11adc3 --workdir /github/workspace --rm -e "INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN" -e "INPUT_REPO_TOKEN" -e "INPUT_ACTION" -e "INPUT_APP_LOCATION" -e "INPUT_API_LOCATION" -e "INPUT_OUTPUT_LOCATION" -e "INPUT_API_BUILD_COMMAND" -e "INPUT_APP_ARTIFACT_LOCATION" -e "INPUT_APP_BUILD_COMMAND" -e "INPUT_ROUTES_LOCATION" -e "INPUT_SKIP_APP_BUILD" -e "INPUT_CONFIG_FILE_LOCATION" -e "INPUT_SKIP_API_BUILD" -e "INPUT_PRODUCTION_BRANCH" -e "INPUT_DEPLOYMENT_ENVIRONMENT" -e "INPUT_IS_STATIC_EXPORT" -e "INPUT_DATA_API_LOCATION" -e "INPUT_GITHUB_ID_TOKEN" -e "HOME" -e "GITHUB_JOB" -e "GITHUB_REF" -e "GITHUB_SHA" -e "GITHUB_REPOSITORY" -e "GITHUB_REPOSITORY_OWNER" -e "GITHUB_REPOSITORY_OWNER_ID" -e "GITHUB_RUN_ID" -e "GITHUB_RUN_NUMBER" -e "GITHUB_RETENTION_DAYS" -e "GITHUB_RUN_ATTEMPT" -e "GITHUB_REPOSITORY_ID" -e "GITHUB_ACTOR_ID" -e "GITHUB_ACTOR" -e "GITHUB_TRIGGERING_ACTOR" -e "GITHUB_WORKFLOW" -e "GITHUB_HEAD_REF" -e "GITHUB_BASE_REF" -e "GITHUB_EVENT_NAME" -e "GITHUB_SERVER_URL" -e "GITHUB_API_URL" -e "GITHUB_GRAPHQL_URL" -e "GITHUB_REF_NAME" -e "GITHUB_REF_PROTECTED" -e "GITHUB_REF_TYPE" -e "GITHUB_WORKFLOW_REF" -e "GITHUB_WORKFLOW_SHA" -e "GITHUB_WORKSPACE" -e "GITHUB_ACTION" -e "GITHUB_EVENT_PATH" -e "GITHUB_ACTION_REPOSITORY" -e "GITHUB_ACTION_REF" -e "GITHUB_PATH" -e "GITHUB_ENV" -e "GITHUB_STEP_SUMMARY" -e "GITHUB_STATE" -e "GITHUB_OUTPUT" -e "RUNNER_OS" -e "RUNNER_ARCH" -e "RUNNER_NAME" -e "RUNNER_ENVIRONMENT" -e "RUNNER_TOOL_CACHE" -e "RUNNER_TEMP" -e "RUNNER_WORKSPACE" -e "ACTIONS_RUNTIME_URL" -e "ACTIONS_RUNTIME_TOKEN" -e "ACTIONS_CACHE_URL" -e "ACTIONS_RESULTS_URL" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/imransbaig/imransbaig":"/github/workspace" 11adc3:aab0b9d459794349b2299f32157b3364
+DeploymentId: 9d863c96-3b10-4e11-b1df-03464e840c51
+
+Try to validate location at: '/github/workspace'.
+App Directory Location: '/' was found.
+Try to validate location at: '/github/workspace/swa-db-connections'.
+Looking for event info
+Starting to build app with Oryx
+Azure Static Web Apps utilizes Oryx to build both static applications and Azure Functions. You can find more details on Oryx here: https://github.com/microsoft/Oryx
+---Oryx build logs---
+
+
+Operation performed by Microsoft Oryx, https://github.com/Microsoft/Oryx
+You can report issues at https://github.com/Microsoft/Oryx/issues
+
+Oryx Version: 0.2.20241003.1, Commit: d5352431d933306ccee1be9b5d822c73bf723e9e, ReleaseTagName: 20241003.1
+
+Build Operation ID: 30d3181ec9e04dc5
+OS Type           : bullseye
+Image Type        : githubactions
+
+Detecting platforms...
+Detected following platforms:
+  python: 3.9.20
+Version '3.9.20' of platform 'python' is not installed. Generating script to install it...
+
+
+Source directory     : /github/workspace
+Destination directory: /bin/staticsites/9d863c96-3b10-4e11-b1df-03464e840c51-swa-oryx/app
+
+
+Downloading and extracting 'python' version '3.9.20' to '/tmp/oryx/platforms/python/3.9.20'...
+Detected image debian flavor: bullseye.
+Downloaded in 10 sec(s).
+Verifying checksum...
+Extracting contents...
+performing sha512 checksum for: python...
+Done in 12 sec(s).
+
+image detector file exists, platform is python..
+OS detector file exists, OS is bullseye..
+Python Version: /tmp/oryx/platforms/python/3.9.20/bin/python3.9
+Creating directory for command manifest file if it does not exist
+Removing existing manifest file
+Python Virtual Environment: pythonenv3.9
+Creating virtual environment...
+Activating virtual environment...
+Running pip install...
+[11:26:56+0000] Collecting fastapi==0.95.1
+[11:26:56+0000]   Downloading fastapi-0.95.1-py3-none-any.whl (56 kB)
+[11:26:56+0000]      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.0/57.0 kB 8.9 MB/s eta 0:00:00
+[11:26:56+0000] Collecting pydantic==1.10.2
+[11:26:56+0000]   Downloading pydantic-1.10.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.2 MB)
+[11:26:57+0000]      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.2/13.2 MB 54.3 MB/s eta 0:00:00
+[11:26:57+0000] Collecting uvicorn==0.22.0
+[11:26:57+0000]   Downloading uvicorn-0.22.0-py3-none-any.whl (58 kB)
+[11:26:57+0000]      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.3/58.3 kB 20.3 MB/s eta 0:00:00
+[11:26:57+0000] Collecting starlette<0.27.0,>=0.26.1
+[11:26:57+0000]   Downloading starlette-0.26.1-py3-none-any.whl (66 kB)
+[11:26:57+0000]      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.9/66.9 kB 19.6 MB/s eta 0:00:00
+[11:26:57+0000] Collecting typing-extensions>=4.1.0
+[11:26:57+0000]   Downloading typing_extensions-4.12.2-py3-none-any.whl (37 kB)
+[11:26:57+0000] Collecting h11>=0.8
+[11:26:57+0000]   Downloading h11-0.14.0-py3-none-any.whl (58 kB)
+[11:26:57+0000]      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.3/58.3 kB 18.5 MB/s eta 0:00:00
+[11:26:57+0000] Collecting click>=7.0
+[11:26:57+0000]   Downloading click-8.1.8-py3-none-any.whl (98 kB)
+[11:26:57+0000]      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 98.2/98.2 kB 33.5 MB/s eta 0:00:00
+[11:26:57+0000] Collecting anyio<5,>=3.4.0
+[11:26:57+0000]   Downloading anyio-4.7.0-py3-none-any.whl (93 kB)
+[11:26:57+0000]      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 93.1/93.1 kB 25.3 MB/s eta 0:00:00
+[11:26:57+0000] Collecting exceptiongroup>=1.0.2
+[11:26:57+0000]   Downloading exceptiongroup-1.2.2-py3-none-any.whl (16 kB)
+[11:26:57+0000] Collecting sniffio>=1.1
+[11:26:57+0000]   Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+[11:26:57+0000] Collecting idna>=2.8
+[11:26:57+0000]   Downloading idna-3.10-py3-none-any.whl (70 kB)
+[11:26:57+0000]      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 70.4/70.4 kB 27.8 MB/s eta 0:00:00
+[11:26:57+0000] Installing collected packages: typing-extensions, sniffio, idna, h11, exceptiongroup, click, uvicorn, pydantic, anyio, starlette, fastapi
+[11:26:58+0000] Successfully installed anyio-4.7.0 click-8.1.8 exceptiongroup-1.2.2 fastapi-0.95.1 h11-0.14.0 idna-3.10 pydantic-1.10.2 sniffio-1.3.1 starlette-0.26.1 typing-extensions-4.12.2 uvicorn-0.22.0
+
+[notice] A new release of pip is available: 23.0.1 -> 24.3.1
+[notice] To update, run: pip install --upgrade pip
+Not a vso image, so not writing build commands
+Preparing output...
+
+Copying files to destination directory '/bin/staticsites/9d863c96-3b10-4e11-b1df-03464e840c51-swa-oryx/app'...
+Done in 0 sec(s).
+
+Removing existing manifest file
+Creating a manifest file...
+Manifest file created.
+Copying .ostype to manifest output directory.
+
+Done in 17 sec(s).
+
+
+---End of Oryx build logs---
+Try to validate location at: '/bin/staticsites/9d863c96-3b10-4e11-b1df-03464e840c51-swa-oryx/app'.
+Finished building app with Oryx
+Failed to find a default file in the app artifacts folder (/). Valid default files: index.html,Index.html.
+If your application contains purely static content, please verify that the variable 'app_location' in your workflow file points to the root of your application.
+If your application requires build steps, please validate that a default file exists in the build output directory.
+
+
+For further information, please visit the Azure Static Web Apps documentation at https://docs.microsoft.com/en-us/azure/static-web-apps/
+If you believe this behavior is unexpected, please raise a GitHub issue at https://github.com/azure/static-web-apps/issues/
+Exiting
