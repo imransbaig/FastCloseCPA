@@ -48,7 +48,7 @@ author = 38595295
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "gunicorn --bind=0.0.0.0:8080 app:app"
+args = "gunicorn --config gunicorn.conf.py app:app"
 
 [[ports]]
 localPort = 5000
