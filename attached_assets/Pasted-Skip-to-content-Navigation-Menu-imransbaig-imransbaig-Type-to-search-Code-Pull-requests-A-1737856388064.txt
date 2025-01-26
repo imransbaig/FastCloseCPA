@@ -1,0 +1,66 @@
+Skip to content
+Navigation Menu
+imransbaig
+imransbaig
+
+Type / to search
+Code
+Pull requests
+Actions
+Projects
+Security
+Insights
+Settings
+Azure Static Web Apps CI/CD
+ci: add Azure Static Web Apps workflow file #2
+Jobs
+Run details
+Annotations
+1 warning
+Build and Deploy Job
+failed on Dec 24, 2024 in 24s
+Search logs
+1s
+16s
+1s
+2s
+0s
+3s
+Run Azure/static-web-apps-deploy@v1
+/usr/bin/docker run --name adc35cf90dd76a8046d9925bb1eaad5628ff_cf1b1e --label 11adc3 --workdir /github/workspace --rm -e "INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN" -e "INPUT_ACTION" -e "INPUT_APP_LOCATION" -e "INPUT_API_LOCATION" -e "INPUT_OUTPUT_LOCATION" -e "INPUT_GITHUB_ID_TOKEN" -e "INPUT_API_BUILD_COMMAND" -e "INPUT_APP_ARTIFACT_LOCATION" -e "INPUT_APP_BUILD_COMMAND" -e "INPUT_REPO_TOKEN" -e "INPUT_ROUTES_LOCATION" -e "INPUT_SKIP_APP_BUILD" -e "INPUT_CONFIG_FILE_LOCATION" -e "INPUT_SKIP_API_BUILD" -e "INPUT_PRODUCTION_BRANCH" -e "INPUT_DEPLOYMENT_ENVIRONMENT" -e "INPUT_IS_STATIC_EXPORT" -e "INPUT_DATA_API_LOCATION" -e "HOME" -e "GITHUB_JOB" -e "GITHUB_REF" -e "GITHUB_SHA" -e "GITHUB_REPOSITORY" -e "GITHUB_REPOSITORY_OWNER" -e "GITHUB_REPOSITORY_OWNER_ID" -e "GITHUB_RUN_ID" -e "GITHUB_RUN_NUMBER" -e "GITHUB_RETENTION_DAYS" -e "GITHUB_RUN_ATTEMPT" -e "GITHUB_REPOSITORY_ID" -e "GITHUB_ACTOR_ID" -e "GITHUB_ACTOR" -e "GITHUB_TRIGGERING_ACTOR" -e "GITHUB_WORKFLOW" -e "GITHUB_HEAD_REF" -e "GITHUB_BASE_REF" -e "GITHUB_EVENT_NAME" -e "GITHUB_SERVER_URL" -e "GITHUB_API_URL" -e "GITHUB_GRAPHQL_URL" -e "GITHUB_REF_NAME" -e "GITHUB_REF_PROTECTED" -e "GITHUB_REF_TYPE" -e "GITHUB_WORKFLOW_REF" -e "GITHUB_WORKFLOW_SHA" -e "GITHUB_WORKSPACE" -e "GITHUB_ACTION" -e "GITHUB_EVENT_PATH" -e "GITHUB_ACTION_REPOSITORY" -e "GITHUB_ACTION_REF" -e "GITHUB_PATH" -e "GITHUB_ENV" -e "GITHUB_STEP_SUMMARY" -e "GITHUB_STATE" -e "GITHUB_OUTPUT" -e "RUNNER_OS" -e "RUNNER_ARCH" -e "RUNNER_NAME" -e "RUNNER_ENVIRONMENT" -e "RUNNER_TOOL_CACHE" -e "RUNNER_TEMP" -e "RUNNER_WORKSPACE" -e "ACTIONS_RUNTIME_URL" -e "ACTIONS_RUNTIME_TOKEN" -e "ACTIONS_CACHE_URL" -e "ACTIONS_ID_TOKEN_REQUEST_URL" -e "ACTIONS_ID_TOKEN_REQUEST_TOKEN" -e "ACTIONS_RESULTS_URL" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/imransbaig/imransbaig":"/github/workspace" 11adc3:5cf90dd76a8046d9925bb1eaad5628ff
+DeploymentId: 342ed8fd-de55-482a-9a17-0d18ad4bf5ef
+
+Try to validate location at: '/github/workspace'.
+App Directory Location: '/' was found.
+Try to validate location at: '/github/workspace/swa-db-connections'.
+Looking for event info
+Starting to build app with Oryx
+Azure Static Web Apps utilizes Oryx to build both static applications and Azure Functions. You can find more details on Oryx here: https://github.com/microsoft/Oryx
+---Oryx build logs---
+
+
+Operation performed by Microsoft Oryx, https://github.com/Microsoft/Oryx
+You can report issues at https://github.com/Microsoft/Oryx/issues
+
+Oryx Version: 0.2.20241003.1, Commit: d5352431d933306ccee1be9b5d822c73bf723e9e, ReleaseTagName: 20241003.1
+
+Build Operation ID: 6f63124b274ae17c
+OS Type           : bullseye
+Image Type        : githubactions
+
+Detecting platforms...
+Detected following platforms:
+  nodejs: 18.20.4
+Version '18.20.4' of platform 'nodejs' is not installed. Generating script to install it...
+Error: Could not find either 'build' or 'build:azure' node under 'scripts' in package.json. Could not find value for custom run build command using the environment variable key 'RUN_BUILD_COMMAND'.Could not find tools for building monorepos, no 'lerna.json' or 'lage.config.js' files found.
+
+
+---End of Oryx build logs---
+Oryx could not find a 'build' or 'build:azure' script in the package configuration. Please add one of these commands to your package configuration file (i.e. package.json). Alternatively, you can add the app_build_command to the build/deploy section of your workflow file. For example, app_build_command: 'npm run docs:build'
+
+For further information, please visit the Azure Static Web Apps documentation at https://docs.microsoft.com/en-us/azure/static-web-apps/
+If you believe this behavior is unexpected, please raise a GitHub issue at https://github.com/azure/static-web-apps/issues/
+Exiting
+0s
+0s
+ci: add Azure Static Web Apps workflow file · imransbaig/imransbaig@36e4285 
