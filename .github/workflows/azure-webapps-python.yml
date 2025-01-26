@@ -1,76 +1,68 @@
-
-name: Build and deploy Python app to Azure Web App
+name: Azure Web Apps CI/CD
 
 on:
   push:
-    branches: [ "main" ]
-  workflow_dispatch:
+    branches:
+      - main  # Using "main" branch as per original
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main # Using "main" branch as per original
 
 env:
-  AZURE_WEBAPP_NAME: fastcloseai
-  PYTHON_VERSION: '3.11'
-
-permissions:
-  contents: read
+  PYTHON_VERSION: '3.9' #Using 3.9 from edited, but could be adjusted.
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+    - uses: actions/checkout@v3
 
-      - name: Set up Python version
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-          cache: 'pip'
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        cache: 'pip' # Added caching from original
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          
-      - name: Run Tests
-        run: |
-          python -m pytest
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
-      - name: Create deployment package
+    - name: Run Tests # Added from original
+      run: |
+        python -m pytest
+
+    - name: Create deployment package # Added from original
         run: zip -r deploy.zip .
 
-      - name: Upload artifact for deployment jobs
-        uses: actions/upload-artifact@v3
-        with:
-          name: python-app
-          path: deploy.zip
+    - name: Upload artifact for deployment jobs
+      uses: actions/upload-artifact@v3
+      with:
+        name: python-app
+        path: deploy.zip #Corrected path from edited
+
 
   deploy:
-    permissions:
-      contents: none
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v3
-        with:
-          name: python-app
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v3
+      with:
+        name: python-app
+        path: .
 
-      - name: Unzip artifact for deployment
+    - name: Unzip artifact for deployment # Added from original
         run: unzip deploy.zip
 
-      - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZUREWEBAPP_PUBLISHPROFILE }}
-          
-      - name: 'Post Deployment Status'
-        if: always()
-        run: |
-          echo "Deployment Status: ${{ steps.deploy-to-webapp.outcome }}"
-          echo "Deployment URL: https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net"
+    - name: 'Deploy to Azure Web App'
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ secrets.AZURE_WEBAPP_NAME }} #Using AZURE_WEBAPP_NAME from original
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }} #Corrected variable name from edited
