@@ -53,3 +53,7 @@ args = "gunicorn --bind=0.0.0.0:8080 app:app"
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 8080
+externalPort = 8080
