@@ -2,7 +2,7 @@
 import multiprocessing
 
 # Server socket
-bind = "0.0.0.0:8000"
+bind = "0.0.0.0:8080"
 backlog = 2048
 
 # Worker processes
@@ -15,7 +15,7 @@ keepalive = 2
 # Logging
 accesslog = "-"
 access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
-errorlog = '-'
+errorlog = "-"
 loglevel = 'info'
 
 # Process naming
@@ -32,3 +32,4 @@ tmp_upload_dir = None
 # SSL
 keyfile = None
 certfile = None
+capture_output = True
