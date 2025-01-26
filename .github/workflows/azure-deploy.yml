@@ -8,6 +8,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: fastcloseai
   PYTHON_VERSION: '3.11'
+  STARTUP_COMMAND: 'gunicorn --bind=0.0.0.0:80 --workers=4 app:app'
 
 permissions:
   contents: read
