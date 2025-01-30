@@ -39,7 +39,7 @@ jobs:
           action: "upload"
           app_location: "/" # App source code path
           api_location: "/" # Api source code path
-          output_location: "." # Built app content directory, changed to root since Flask handles static files
+          output_location: "static" # Built app content directory
           app_build_command: "python -m flask --app app routes" # List routes instead of running server
 
   close_pull_request_job:

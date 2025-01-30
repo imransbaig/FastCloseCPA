@@ -2,7 +2,10 @@
   "routes": [
     {
       "route": "/static/*",
-      "serve": "/static"
+      "serve": "/static/*",
+      "headers": {
+        "cache-control": "must-revalidate, max-age=15770000"
+      }
     },
     {
       "route": "/api/*",
@@ -16,14 +19,15 @@
     }
   ],
   "navigationFallback": {
-    "rewrite": "/"
+    "rewrite": "/",
+    "exclude": ["/static/*", "/api/*"]
   },
   "platform": {
     "apiRuntime": "python:3.11"
   },
   "buildProperties": {
-    "outputLocation": ".",
+    "outputLocation": "static",
     "appLocation": ".",
-    "appArtifactLocation": "."
+    "appArtifactLocation": "static"
   }
 }
