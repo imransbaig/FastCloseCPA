@@ -16,7 +16,7 @@
     }
   ],
   "navigationFallback": {
-    "rewrite": "/index.html"
+    "rewrite": "/"
   },
   "platform": {
     "apiRuntime": "python:3.11"
