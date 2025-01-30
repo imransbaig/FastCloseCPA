@@ -1,0 +1,24 @@
+{
+  "routes": [
+    {
+      "route": "/static/*",
+      "serve": "/static"
+    },
+    {
+      "route": "/*",
+      "serve": "/",
+      "allowedRoles": ["anonymous"]
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html"
+  },
+  "platform": {
+    "apiRuntime": "python:3.11"
+  },
+  "buildProperties": {
+    "outputLocation": ".",
+    "appLocation": ".",
+    "appArtifactLocation": "."
+  }
+}

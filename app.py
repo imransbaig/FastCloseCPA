@@ -21,12 +21,16 @@ app.secret_key = os.environ.get("FLASK_SECRET_KEY") or "fastcloseai2024"
 logger.info("Secret key configured")
 
 # Configure database - use PostgreSQL for Azure, fallback to SQLite for local
-database_url = os.environ.get('DATABASE_URL', 'sqlite:///fastclose.db')
-if database_url.startswith("postgres://"):  # Handle Azure PostgreSQL URL
-    database_url = database_url.replace("postgres://", "postgresql://", 1)
-app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+database_url = os.environ.get('DATABASE_URL')
+if database_url:
+    if database_url.startswith("postgres://"):  # Handle Azure PostgreSQL URL
+        database_url = database_url.replace("postgres://", "postgresql://", 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///fastclose.db'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-logger.info("Database configuration set")
+logger.info(f"Database configuration set: {app.config['SQLALCHEMY_DATABASE_URI']}")
 
 # Initialize extensions
 db.init_app(app)
@@ -60,8 +64,14 @@ except Exception as e:
 
 # Add a test route to verify the server is working
 @app.route('/health')
-def health_check():
+def health_check_original():
     return {'status': 'ok', 'message': 'Flask server is running'}
+
+# Add a health check endpoint for Azure
+@app.route('/api/health')
+def health_check():
+    return {'status': 'healthy', 'message': 'FastClose CPA service is running'}, 200
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -178,5 +188,5 @@ if __name__ == '__main__':
             logger.error(f"Error creating database tables: {e}")
             raise
 
-    logger.info("Starting Flask development server")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
