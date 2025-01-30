@@ -2,13 +2,15 @@ name: Deploy to Azure Web App
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
+  workflow_dispatch:
 
 env:
   AZURE_WEBAPP_NAME: fastcloseai
   PYTHON_VERSION: '3.11'
-  STARTUP_COMMAND: 'gunicorn --bind=0.0.0.0:80 app:app'
+
+permissions:
+  contents: read
 
 jobs:
   build:

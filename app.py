@@ -3,11 +3,8 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 import logging
 from datetime import datetime
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
 from extensions import db
 from werkzeug.security import generate_password_hash
-import time
 
 # Setup detailed logging
 logging.basicConfig(
@@ -20,47 +17,19 @@ app = Flask(__name__)
 logger.info("Flask application instance created")
 
 # setup a secret key, required by sessions
-app.secret_key = os.environ.get("FLASK_SECRET_KEY") or "a secret key"
-
-# Configure SendGrid
-SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
-logger.info(f"SendGrid API Key configured: {'Yes' if SENDGRID_API_KEY else 'No'}")
+app.secret_key = os.environ.get("FLASK_SECRET_KEY") or "fastcloseai2024"
+logger.info("Secret key configured")
 
 # Configure database - use PostgreSQL for Azure, fallback to SQLite for local
 database_url = os.environ.get('DATABASE_URL', 'sqlite:///fastclose.db')
 if database_url.startswith("postgres://"):  # Handle Azure PostgreSQL URL
     database_url = database_url.replace("postgres://", "postgresql://", 1)
-    # Add SSL mode and connection retry parameters
-    if '?' in database_url:
-        database_url += '&sslmode=require&connect_timeout=10'
-    else:
-        database_url += '?sslmode=require&connect_timeout=10'
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url
-app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-    'pool_pre_ping': True,
-    'pool_recycle': 300,
-    'pool_timeout': 900
-}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 logger.info("Database configuration set")
 
 # Initialize extensions
 db.init_app(app)
-# Add retry logic for database connection
-max_retries = 3
-retry_count = 0
-while retry_count < max_retries:
-    try:
-        with app.app_context():
-            db.engine.connect()
-            break
-    except Exception as e:
-        retry_count += 1
-        logger.warning(f"Database connection attempt {retry_count} failed: {e}")
-        if retry_count == max_retries:
-            logger.error("Failed to connect to database after maximum retries")
-            raise
-        time.sleep(2)  # Wait before retrying
 logger.info("Database initialization complete")
 
 # Initialize Flask-Login
@@ -180,8 +149,6 @@ def contact():
         message = request.form.get('message')
         service_type = request.form.get('service_type')
 
-        logger.info(f"Processing contact form submission from {email}")
-
         consultation = Consultation(
             name=name,
             email=email,
@@ -190,49 +157,15 @@ def contact():
         )
 
         try:
-            # Save to database
             db.session.add(consultation)
             db.session.commit()
             logger.info(f"New consultation created for {email}")
-
-            # Send email using SendGrid
-            try:
-                message_body = f"""
-                New contact form submission:
-
-                Name: {name}
-                Email: {email}
-                Service Type: {service_type}
-                Message:
-                {message}
-                """
-
-                message = Mail(
-                    from_email='contact@fastclose.ai',  # Updated email address
-                    to_emails='contact@fastclose.ai', # Updated email address
-                    subject=f'New Contact Form Submission - {service_type}',
-                    plain_text_content=message_body
-                )
-
-                sg = SendGridAPIClient(SENDGRID_API_KEY)
-                response = sg.send(message)
-                logger.info(f"SendGrid Response Status Code: {response.status_code}")
-                logger.info(f"Email notification sent for consultation from {email}")
-
-                flash('Thank you for your message! We will contact you soon.', 'success')
-                return redirect(url_for('contact'))
-
-            except Exception as email_error:
-                logger.error(f"Error sending email via SendGrid: {email_error}")
-                # Don't rollback database transaction if email fails
-                flash('Your message was saved but there was an issue sending the notification email.', 'warning')
-                return redirect(url_for('contact'))
-
+            flash('Thank you for your message! We will contact you soon.', 'success')
+            return redirect(url_for('contact'))
         except Exception as e:
-            logger.error(f"Error processing contact form: {e}")
+            logger.error(f"Error saving consultation: {e}")
+            flash('An error occurred. Please try again.', 'error')
             db.session.rollback()
-            flash('An error occurred while processing your message. Please try again later.', 'error')
-            return render_template('contact.html')
 
     return render_template('contact.html')
 
