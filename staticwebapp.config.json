@@ -5,6 +5,11 @@
       "serve": "/static"
     },
     {
+      "route": "/api/*",
+      "methods": ["GET", "POST", "PUT", "DELETE"],
+      "serve": "/api"
+    },
+    {
       "route": "/*",
       "serve": "/",
       "allowedRoles": ["anonymous"]
