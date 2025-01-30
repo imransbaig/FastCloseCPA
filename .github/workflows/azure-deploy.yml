@@ -39,7 +39,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Include web.config in the deployment
       - name: Copy deployment config
         run: |
           cp web.config ./
