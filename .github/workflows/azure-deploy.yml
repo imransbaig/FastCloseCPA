@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: fastcloseai    # Azure Web App name
+  AZURE_WEBAPP_NAME: fastcloseai    # Azure Web App name without the slot
   PYTHON_VERSION: '3.11'
 
 permissions:
@@ -41,9 +41,15 @@ jobs:
 
       - name: Copy deployment config
         run: |
-          cp web.config ./
+          cp web.config ./ # Ensure web.config is copied and potentially updated.
           cp startup.txt ./
           cp main.py ./
+          cp app.py ./
+          cp -r static ./
+          cp -r templates ./
+          cp -r blueprints ./
+          cp extensions.py ./
+          cp models.py ./
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
