@@ -1,1 +1,1 @@
-gunicorn --bind=0.0.0.0 --timeout 600 --workers=4 --access-logfile '-' --error-logfile '-' app:app
+gunicorn --bind=0.0.0.0 --timeout 600 --workers=4 --access-logfile '-' --error-logfile '-' --log-level debug --static-map /static=static app:app

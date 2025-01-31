@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, send_from_directory
 import logging
 from datetime import datetime
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
@@ -13,7 +13,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 logger.info("Flask application instance created")
 
 # setup a secret key, required by sessions
