@@ -34,6 +34,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Run Tests
+        continue-on-error: true  # Make tests optional
+        run: |
+          python -m pytest
+
       - name: Copy essential files
         run: |
           cp app.py ./

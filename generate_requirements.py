@@ -10,6 +10,7 @@ def generate_requirements():
         "flask-sqlalchemy==3.1.1",
         "gunicorn==23.0.0",
         "psycopg2-binary==2.9.10",
+        "pytest==8.0.0",
         "trafilatura==2.0.0",
         "werkzeug==3.1.3",
         "wfastcgi==3.0.0"
