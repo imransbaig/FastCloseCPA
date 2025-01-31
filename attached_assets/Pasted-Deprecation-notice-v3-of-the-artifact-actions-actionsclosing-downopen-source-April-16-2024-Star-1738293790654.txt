@@ -1,0 +1,22 @@
+Deprecation notice: v3 of the artifact actions
+actionsclosing-downopen-source
+April 16, 2024
+Starting January 30th, 2025, GitHub Actions customers will no longer be able to use v3 of actions/upload-artifact or actions/download-artifact. Customers should update workflows to begin using v4 of the artifact actions as soon as possible. While v4 of the artifact actions improves upload and download speeds by up to 98% and includes several new features, there are key differences from previous versions that may require updates to your workflows. Please see the documentation in the project repositories for guidance on how to migrate your workflows.
+
+The deprecation of v3 will be similar to the previously announced v1 and v2 deprecation plans, which is scheduled to take place on June 30, 2024. Version tags will not be removed from the project repositories, however, attempting to use a version of the actions after the deprecation date will result in a workflow failure. Artifacts within their retention period will remain accessible from the UI or REST API regardless of the version used to upload. This deprecation will not impact any existing versions of GitHub Enterprise Server being used by customers.
+
+This announcement will also be added to actions/upload-artifact and actions/download-artifact. Please visit the documentation to learn more about storing workflow data as artifacts in Actions.
+
+sourceRepositoryUrl is now a required input to the StartRepositoryMigration GraphQL Endpoint
+April 15, 2024
+migrations
+The StartRepositoryMigration GraphQL API endpoint will now require the sourceRepositoryUrl as an input field. While this is a breaking change to the StartRepositoryMigration GraphQL API schema, including this parameter was a de facto requirement already that will now be documented correctly. All StartRepositoryMigration GraphQL requests currently made without this input result in a failed migration. As such, this change should have minimal impact to those using the StartRepositoryMigration GraphQL API endpoint.
+
+Secret scanning changes to detection and validation for Google Cloud Platform, Slack
+April 11, 2024
+advanced-securitysecret-scanningsecurity-and-compliance
+GitHub secret scanning now supports validity checks for Google Cloud Platform (GCP) account credentials and Slack webhooks. This improvement involves changes to how account credentials for GCP are detected and alerted on.
+
+Secret scanning alerts for Slack webhooks now support validity checks, in addition to previously supported Slack API tokens.
+
+In addition, secret scanning now also alerts on complete GCP service account credential objects which include the fully matched private key, private key ID, and certificate URLs. These alerts support validity checks. As part of this change, you will no longer receive alerts for GCP private key IDs.

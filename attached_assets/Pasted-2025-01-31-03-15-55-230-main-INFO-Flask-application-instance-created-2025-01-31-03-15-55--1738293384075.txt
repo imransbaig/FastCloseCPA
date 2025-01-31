@@ -1,0 +1,41 @@
+2025-01-31 03:15:55,230 - __main__ - INFO - Flask application instance created
+2025-01-31 03:15:55,230 - __main__ - INFO - Secret key configured
+2025-01-31 03:15:55,230 - __main__ - INFO - Database configuration set: postgresql://neondb_owner:3o4EIaBKrFxi@ep-white-star-a44g3bfk.us-east-1.aws.neon.tech/neondb?sslmode=require
+2025-01-31 03:15:55,282 - __main__ - INFO - Database initialization complete
+2025-01-31 03:15:55,282 - __main__ - INFO - Flask-Login initialized
+2025-01-31 03:15:55,293 - __main__ - INFO - Models imported successfully
+2025-01-31 03:15:55,295 - __main__ - INFO - Client portal blueprint registered
+2025-01-31 03:15:55,744 - __main__ - INFO - Database tables created successfully
+ * Serving Flask app 'app'
+ * Debug mode: on
+2025-01-31 03:15:55,780 - werkzeug - INFO - WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.128.24:5000
+2025-01-31 03:15:55,780 - werkzeug - INFO - Press CTRL+C to quit
+2025-01-31 03:15:55,781 - werkzeug - INFO -  * Restarting with stat
+2025-01-31 03:15:56,355 - __main__ - INFO - Flask application instance created
+2025-01-31 03:15:56,355 - __main__ - INFO - Secret key configured
+2025-01-31 03:15:56,355 - __main__ - INFO - Database configuration set: postgresql://neondb_owner:3o4EIaBKrFxi@ep-white-star-a44g3bfk.us-east-1.aws.neon.tech/neondb?sslmode=require
+2025-01-31 03:15:56,395 - __main__ - INFO - Database initialization complete
+2025-01-31 03:15:56,395 - __main__ - INFO - Flask-Login initialized
+2025-01-31 03:15:56,404 - __main__ - INFO - Models imported successfully
+2025-01-31 03:15:56,406 - __main__ - INFO - Client portal blueprint registered
+2025-01-31 03:15:56,855 - __main__ - INFO - Database tables created successfully
+2025-01-31 03:15:56,881 - werkzeug - WARNING -  * Debugger is active!
+2025-01-31 03:15:56,882 - werkzeug - INFO -  * Debugger PIN: 227-907-467
+2025-01-31 03:15:56,968 - __main__ - DEBUG - Accessing index route
+2025-01-31 03:15:56,979 - werkzeug - INFO - 172.31.128.24 - - [31/Jan/2025 03:15:56] "GET / HTTP/1.1" 200 -
+2025-01-31 03:15:57,028 - __main__ - DEBUG - Accessing index route
+2025-01-31 03:15:57,029 - werkzeug - INFO - 172.31.128.24 - - [31/Jan/2025 03:15:57] "GET / HTTP/1.1" 200 -
+2025-01-31 03:15:57,062 - werkzeug - INFO - 172.31.128.24 - - [31/Jan/2025 03:15:57] "GET /static/css/custom.css HTTP/1.1" 304 -
+2025-01-31 03:15:57,107 - werkzeug - INFO - 172.31.128.24 - - [31/Jan/2025 03:15:57] "GET /static/css/custom.css HTTP/1.1" 304 -
+2025-01-31 03:15:57,143 - werkzeug - INFO - 172.31.128.24 - - [31/Jan/2025 03:15:57] "GET /static/js/main.js HTTP/1.1" 304 -
+2025-01-31 03:15:57,182 - werkzeug - INFO - 172.31.128.24 - - [31/Jan/2025 03:15:57] "GET /static/js/main.js HTTP/1.1" 304 -
+2025-01-31 03:15:57,392 - werkzeug - INFO - 172.31.128.24 - - [31/Jan/2025 03:15:57] "GET /static/images/texture-overlay.png HTTP/1.1" 404 -
+2025-01-31 03:15:57,473 - werkzeug - INFO - 172.31.128.24 - - [31/Jan/2025 03:15:57] "GET /static/images/texture-overlay.png HTTP/1.1" 404 -
+2025-01-31 03:16:08,127 - __main__ - DEBUG - Accessing index route
+2025-01-31 03:16:08,127 - werkzeug - INFO - 172.31.128.24 - - [31/Jan/2025 03:16:08] "GET / HTTP/1.1" 200 -
+2025-01-31 03:16:08,139 - werkzeug - INFO - 172.31.128.24 - - [31/Jan/2025 03:16:08] "GET /static/css/custom.css HTTP/1.1" 200 -
+2025-01-31 03:16:08,156 - werkzeug - INFO - 172.31.128.24 - - [31/Jan/2025 03:16:08] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-01-31 03:16:08,290 - werkzeug - INFO - 172.31.128.24 - - [31/Jan/2025 03:16:08] "GET /static/images/texture-overlay.png HTTP/1.1" 404 -
