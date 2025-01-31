@@ -28,7 +28,7 @@ jobs:
 
     - name: Run Tests
       run: |
-        python -m pytest
+        python -m pytest tests/ -v
 
     - name: Deploy to Azure
       if: github.ref == 'refs/heads/main'
