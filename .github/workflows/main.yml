@@ -54,10 +54,11 @@ jobs:
         cp web.config deploy/ || true
         
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: app-package
         path: deploy/
+        retention-days: 5
 
   deploy:
     needs: build
@@ -66,7 +67,7 @@ jobs:
     
     steps:
     - name: Download artifact
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: app-package
         path: .
