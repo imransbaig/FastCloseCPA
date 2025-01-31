@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: fastcloseai    # Azure Web App name without the slot
+  AZURE_WEBAPP_NAME: fastcloseai
   PYTHON_VERSION: '3.11'
 
 permissions:
@@ -25,11 +25,6 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'pip'
 
-      - name: Create and start virtual environment
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-
       - name: Generate requirements.txt
         run: |
           python generate_requirements.py
@@ -39,17 +34,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Copy deployment config
+      - name: Copy essential files
         run: |
-          cp web.config ./ # Ensure web.config is copied and potentially updated.
-          cp startup.txt ./
-          cp main.py ./
           cp app.py ./
+          cp main.py ./
           cp -r static ./
           cp -r templates ./
-          cp -r blueprints ./
-          cp extensions.py ./
-          cp models.py ./
+          cp requirements.txt ./
+          cp web.config ./
+          cp startup.txt ./
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
@@ -81,4 +74,3 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZUREWEBAPP_PUBLISH_PROFILE }}
-          startup-command: 'gunicorn --bind=0.0.0.0 --timeout 600 --workers=4 --access-logfile - --error-logfile - --log-level debug main:app'
