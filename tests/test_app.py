@@ -1,16 +1,18 @@
 
-import unittest
+import pytest
 from app import app
 
-class TestApp(unittest.TestCase):
-    def setUp(self):
-        self.client = app.test_client()
-        self.client.testing = True
+@pytest.fixture
+def client():
+    app.config['TESTING'] = True
+    with app.test_client() as client:
+        yield client
 
-    def test_health_check(self):
-        response = self.client.get('/api/health')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json['status'], 'healthy')
+def test_health_check(client):
+    response = client.get('/api/health')
+    assert response.status_code == 200
+    assert response.json['status'] == 'healthy'
 
-if __name__ == '__main__':
-    unittest.main()
+def test_home_page(client):
+    response = client.get('/')
+    assert response.status_code == 200
