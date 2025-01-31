@@ -43,6 +43,7 @@ jobs:
         run: |
           cp web.config ./
           cp startup.txt ./
+          cp main.py ./
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
@@ -74,4 +75,4 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZUREWEBAPP_PUBLISH_PROFILE }}
-          startup-command: 'gunicorn --bind=0.0.0.0 --timeout 600 --workers=4 --static-map /static=static app:app'
+          startup-command: 'gunicorn --bind=0.0.0.0 --timeout 600 --workers=4 --access-logfile - --error-logfile - --log-level debug main:app'
